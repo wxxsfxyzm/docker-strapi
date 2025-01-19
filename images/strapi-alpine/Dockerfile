@@ -13,14 +13,6 @@ VOLUME /srv/app
 
 WORKDIR /srv/app
 
-# 复制 package.json 和 package-lock.json，并安装生产依赖
-COPY ./package.json ./package-lock.json* ./
-RUN npm ci --only=production
-
-# 复制应用代码
-COPY . .
-
-
 # 设置非 root 用户
 USER node
 
