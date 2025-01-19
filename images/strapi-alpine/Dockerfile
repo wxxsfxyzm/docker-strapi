@@ -1,12 +1,20 @@
+# BASE
+ARG NODE=node
 ARG NODE_VERSION=18
-FROM node:${NODE_VERSION}-alpine AS base
+FROM ${NODE}:${NODE_VERSION}-alpine AS base-alpine
+EXPOSE 1337
 
-WORKDIR /app
-
-# 安装 Strapi CLI
-RUN npm install -g @strapi/strapi@latest
+FROM base-alpine
 
 RUN mkdir -p /srv/app && chown 1000:1000 -R /srv/app
+
+ARG STRAPI_VERSION=4.24.2
+
+ENV STRAPI_VERSION=$STRAPI_VERSION
+
+ARG GITHUB_ACTIONS=0
+
+ENV GITHUB_ACTIONS=$GITHUB_ACTIONS
 
 WORKDIR /srv/app
 
