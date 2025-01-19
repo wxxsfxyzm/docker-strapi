@@ -34,7 +34,7 @@ if [ "$*" = "strapi" ]; then
     SOURCE_FILE="/srv/app/src/admin/app.example.js"
     TARGET_FILE="/srv/app/src/admin/app.js"
     # 移除 'zh-Hans' 前面的注释
-    sed -i 's#// \'zh-Hans\'#\'zh-Hans\'#' "$SOURCE_FILE"
+    sed -i "s#// 'zh-Hans' #'zh-Hans'#" "$SOURCE_FILE"
     mv "$SOURCE_FILE" "$TARGET_FILE"
 
   fi
