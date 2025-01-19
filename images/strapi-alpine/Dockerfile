@@ -6,22 +6,16 @@ WORKDIR /app
 # 安装 Strapi CLI
 RUN npm install -g @strapi/strapi@latest
 
-# 创建应用目录
-RUN mkdir -p /srv/app && chown node:node -R /srv/app
-
-VOLUME /srv/app
+RUN mkdir -p /srv/app && chown 1000:1000 -R /srv/app
 
 WORKDIR /srv/app
 
-# 设置非 root 用户
-USER node
+VOLUME /srv/app
 
-# 暴露端口
-EXPOSE 1337
+COPY docker-entrypoint.sh /usr/local/bin/
 
-# 设置入口点脚本
-COPY ./docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod 777 /usr/local/bin/docker-entrypoint.sh && ln -s /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
+
 CMD ["strapi"]
