@@ -212,6 +212,15 @@ EOT
     fi
   fi
 
+  if [ "${DATABASE_CLIENT}" = "mysql" ] && ! grep -q "\"mysql2\"" package.json; then
+    echo "Adding Mysql packages..."
+    if [ -f "yarn.lock" ]; then
+      yarn add "mysql2@^3.9.8" --prod || { echo "Adding mysql2 packages failed"; exit 1; }
+    else
+      npm install mysql2@"^3.9.8" --only=prod || { echo "Adding Mysql2 packages failed"; exit 1; }
+    fi
+  fi
+
   if [ "${DATABASE_CLIENT}" = "postgres" ] && ! grep -q "\"pg\"" package.json; then
     echo "Adding Postgres packages..."
     if [ -f "yarn.lock" ]; then
@@ -222,12 +231,9 @@ EOT
   fi
 
   if [ "$NEED_CHINESE" = "true" ]; then
-    SOURCE_FILE="/srv/app/src/admin/app.example.js"
     TARGET_FILE="/srv/app/src/admin/app.js"
     # 移除 'zh-Hans' 前面的注释
-    sed -i "s#// 'zh-Hans' #'zh-Hans'#" "$SOURCE_FILE"
-    mv "$SOURCE_FILE" "$TARGET_FILE"
-
+    sed -i "s#// 'zh-Hans' #'zh-Hans'#" "$TARGET_FILE"
   fi
 
   BUILD=${BUILD:-false}
