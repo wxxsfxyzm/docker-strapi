@@ -1,17 +1,17 @@
 # strapi (v4+) containerized
 
-![Strapi](https://github.com/naskio/docker-strapi/blob/main/assets/PNG.logo.purple.dark.png?raw=true)
+![Strapi](https://github.com/wxxsfxyzm/docker-strapi/blob/main/assets/PNG.logo.purple.dark.png?raw=true)
 
 > Docker image for strapi version 4 (latest version)
 
 API creation made simple, secure and fast. The most advanced open-source Content Management Framework to build powerful
 API with no effort.
 
-[GitHub repository](https://github.com/naskio/docker-strapi)
+[GitHub repository](https://github.com/wxxsfxyzm/docker-strapi)
 
-[Docker Hub](https://hub.docker.com/r/naskio/strapi)
+[Docker Hub](https://hub.docker.com/r/wxxsfxyzm/strapi)
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/naskio/strapi.svg?style=for-the-badge)](https://hub.docker.com/r/naskio/strapi)
+[![Docker Pulls](https://img.shields.io/docker/pulls/naskio/strapi.svg?style=for-the-badge)](https://hub.docker.com/r/wxxsfxyzm/strapi)
 
 ---
 
@@ -23,7 +23,7 @@ Using Docker Compose, create `docker-compose.yml` file with the following conten
 version: "3"
 services:
   strapi:
-    image: naskio/strapi
+    image: wxxsfxyzm/strapi
     environment:
       NODE_ENV: development # or production
     ports:
