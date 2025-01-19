@@ -230,11 +230,25 @@ EOT
     fi
   fi
 
-  if [ "$NEED_CHINESE" = "true" ]; then
-    TARGET_FILE="/srv/app/src/admin/app.js"
+#!/bin/bash
+
+# 判断是否需要中文配置
+if [ "$NEED_CHINESE" = "true" ]; then
+  SOURCE_FILE="/srv/app/src/admin/app.example.js"
+  TARGET_FILE="/srv/app/src/admin/app.js"
+
+  # 判断目标文件是否已存在，如果不存在才执行后续操作
+  if [ ! -f "$TARGET_FILE" ]; then
     # 移除 'zh-Hans' 前面的注释
-    sed -i "s#// 'zh-Hans' #'zh-Hans'#" "$TARGET_FILE"
+    sed -i "s#// 'zh-Hans' #'zh-Hans'#" "$SOURCE_FILE"
+    
+    # 将源文件重命名为目标文件
+    mv "$SOURCE_FILE" "$TARGET_FILE"
+    echo "文件已成功更新并重命名为 app.js"
+  else
+    echo "文件 $TARGET_FILE 已存在，跳过处理。"
   fi
+fi
 
   BUILD=${BUILD:-false}
 
